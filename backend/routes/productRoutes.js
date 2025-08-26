@@ -140,7 +140,7 @@ router.get("/categories/list", async (req, res) => {
 
 // Admin routes (require authentication)
 // Create new product with image upload
-router.post("/", auth, upload.array("images", 5), async (req, res) => {
+router.post("/", auth, upload.array("images", 5) , async (req, res) => {
   try {
     console.log("[v0] Product creation request received");
     console.log("[v0] Request body:", req.body);
