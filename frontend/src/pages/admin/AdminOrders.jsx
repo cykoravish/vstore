@@ -20,9 +20,8 @@ const AdminOrders = () => {
     try {
       setLoading(true)
       const response = await getOrders()
-
       if (response.success) {
-        setOrders(response.data.orders || response.data)
+        setOrders(response.orders)
       } else {
         toast.error("Failed to load orders")
       }
