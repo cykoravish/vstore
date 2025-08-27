@@ -17,17 +17,18 @@ const Products = () => {
   const [searchParams] = useSearchParams()
   const { addToCart } = useCart()
 
-  const categories = [
+    const categories = [
     "all",
-    "Electronics",
-    "Clothing",
-    "Home & Garden",
-    "Sports",
-    "Books",
-    "Beauty",
-    "Toys",
-    "Automotive",
-  ]
+    "Decoration",
+    "Grocery",
+    "Makeover",
+    "Halwai",
+    "Catering",
+    "Car",
+    "Furniture",
+    "Saree",
+    "Other",
+  ];
 
   useEffect(() => {
     // Get search and category from URL params
@@ -45,7 +46,7 @@ const Products = () => {
       setLoading(true)
       const response = await getProducts({
         search: searchTerm,
-        category: selectedCategory === "all" ? undefined : selectedCategory,
+        category: selectedCategory === "all" ? "all" : selectedCategory,
         sortBy,
         page: 1,
         limit: 50,
@@ -85,6 +86,7 @@ const Products = () => {
     })
 
   const handleAddToCart = (product) => {
+    console.log("p:", JSON.stringify(product))
     addToCart(product)
   }
 
@@ -196,7 +198,7 @@ const Products = () => {
         >
           {filteredProducts.map((product, index) => (
             <motion.div
-              key={product.id}
+              key={product._id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -207,7 +209,7 @@ const Products = () => {
             >
               <div className={`relative overflow-hidden ${viewMode === "list" ? "w-48 flex-shrink-0" : ""}`}>
                 <img
-                  src={product.image || "/placeholder.svg"}
+                  src={product.images[0].url || "/placeholder.svg"}
                   alt={product.name}
                   className={`object-cover group-hover:scale-105 transition-transform duration-300 ${
                     viewMode === "list" ? "w-full h-48" : "w-full h-64"

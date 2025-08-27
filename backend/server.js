@@ -1,19 +1,16 @@
 import express from "express";
+import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
-import connectDB from "./config/database.js";
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import { errorHandler } from "./middleware/errorHandler.js";
-
-// Connect to MongoDB
-connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -72,7 +69,12 @@ app.use("*", (req, res) => {
   });
 });
 
+// Connect to MongoDB
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("MongoDB connection error:", err));
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
 });

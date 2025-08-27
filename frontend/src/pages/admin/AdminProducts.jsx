@@ -138,14 +138,14 @@ const AdminProducts = () => {
 
   const categories = [
     "all",
-    "Electronics",
-    "Clothing",
-    "Sports",
-    "Home & Garden",
-    "Books",
-    "Beauty",
-    "Toys",
-    "Automotive",
+    "Decoration",
+    "Grocery",
+    "Makeover",
+    "Halwai",
+    "Catering",
+    "Car",
+    "Furniture",
+    "Saree",
     "Other",
   ];
 
